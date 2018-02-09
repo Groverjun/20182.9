@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name=renderer content=webkit>
+		<title>模板编辑</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+		<link rel="stylesheet" type="text/css" href="scss/index.css"/>
+	</head>
+	<body>
+	<div id="html">
+		<div class="head">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2">
+					<img v-bind:src="headTxt_Img.logo" v-on:click="logoImg"/>
+					</div>
+					<div class="col-lg-10">
+						<ul>
+							<li>
+								<span v-if="show" v-on:click="edit">{{headTxt_Img.txt1}}</span>
+								<input type="text"v-else="show" v-model="headTxt_Img.txt1" v-on:focusout="okedit" @keyup.13="okedit($event)"/>
+							</li>
+							<li>
+								<span v-if="show" v-on:click="edit">{{headTxt_Img.txt2}}</span>
+								<input type="text"v-else="show" v-model="headTxt_Img.txt2" v-on:focusout="okedit" @keyup.13="okedit($event)"/>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="model_banner">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<img src="images/banner.jpg" width="100%"/>
+					</div>
+					<div class="swiper-slide">
+						<img src="images/banner.jpg" width="100%"/>
+					</div>
+					<div class="swiper-slide">
+						<img src="images/banner.jpg" width="100%"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="b1_list">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 ">
+						<div class="title_Top">
+							<span v-if="show" v-on:click="edit">{{headtop_txt.h1}}</span>
+							<input type="text"v-else="show" v-model="headtop_txt.h1" v-on:focusout="okedit" @keyup.13="okedit($event)" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 col-lg-6 col-lg-12" v-for="arr1 in product">
+						<ul>
+							<li><img v-bind:src="arr1.img" width="100%"/></li>
+							<li>
+								<p>
+									<i></i>
+									<span  v-if="show" v-on:click="edit">{{arr1.p}}</span>
+									<input type="text" v-else="show" v-on:focusout="okedit" @keyup.13="okedit($event)" v-model="arr1.p"/>
+									<i></i>
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="abt1">
+			<img src="images/abt1.jpg" width="100%"/>
+		</div>
+		<div class="b2_list">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="title_Top">
+							<span v-if="show" v-on:click="edit">{{headtop_txt.h2}}</span>
+							<input type="text"v-else="show" v-model="headtop_txt.h2" v-on:focusout="okedit" @keyup.13="okedit($event)" />
+						</div>
+					</div>
+				</div>
+				<div class="b2_listB" v-for="(arr2,index) in advantage">
+					<div class="row">
+						<div class="col-lg-6 col-lg-12" :style="calcStyle(index)">
+							<div class="b2_listUL">
+								<div class="b2_listUL_top">
+									<h1>
+										<span v-if="show" v-on:click="edit">{{arr2.h1}}</span>
+										<input type="text" v-else="show" v-model="arr2.h1" v-on:focusout="okedit" @keyup.13="okedit($event)"/>
+									</h1>
+									<p>
+										<span v-if="show" v-on:click="edit">{{arr2.p}}</span>
+										<input type="text" v-else="show" v-model="arr2.p" v-on:focusout="okedit" @keyup.13="okedit($event)"/>
+									</p>
+								</div>
+								<ul>
+									<li v-for="arr3 in arr2.li">
+										<span v-if="show" v-on:click="edit">{{arr3}}</span>
+										<input type="text" type="text" v-else="show" v-model="arr3" v-on:focusout="okedit" @keyup.13="okedit($event)"/>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-6 col-lg-12">
+							<img v-bind:src="arr2.img" width="100%"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="abt1">
+			<img src="images/abt2.jpg" width="100%"/>
+		</div>
+		<div class="b3_list">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="title_Top">
+							<span v-if="show" v-on:click="edit">{{headtop_txt.h3}}</span>
+							<input type="text"v-else="show" v-model="headtop_txt.h3" v-on:focusout="okedit" @keyup.13="okedit($event)" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 col-lg-12" v-for="arr4 in successfulCases">
+						<ul>
+							<li><img v-bind:src="arr4.img" width="100%"/></li>
+							<li>
+								<p>
+									<i></i>
+									<span v-if="show" v-on:click="edit">{{arr4.p}}</span>
+									<input type="text" v-else="show" v-model="arr4.p" v-on:focusout="okedit" @keyup.13="okedit($event)" />
+									<i></i>
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="title_Top">
+						<span v-if="show" v-on:click="edit">{{headtop_txt.h4}}</span>
+							<input type="text"v-else="show" v-model="headtop_txt.h4" v-on:focusout="okedit" @keyup.13="okedit($event)" @keyup.13="okedit($event)" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="foot">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3" v-for="arr5 in foot">
+						<p class="text-center"><img v-bind:src="arr5" width="100%"/></p>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 ">
+						<div class="foot_abt text-center">
+							<button class="btn btn-primary">立即咨询</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--内容结束-->
+		<!--logo编辑区-->
+		<div id="logoImg" v-if="logoImgHide">
+			<div class="container">
+				<div class="logoImgB">
+					<h1 class="clearfix">logo-更换 <a href="#" class="pull-right" v-on:click="logoImg">关闭</a></h1>
+					<ul>
+						<li>
+							<p>请选择正确的尺寸图片</p>
+							<p>模板尺寸：宽200像素X高70像素</p>
+						</li>
+						<li  class="text-center">
+							<div class="logoImgUl" v-if="showFile">
+								<a href="javascript:;" class="file" >添加logo<input type="file" ref="logo" id="file" v-on:click="logoEdlit()"></a>
+							</div>
+							<img v-bind:src="minLogo"/>
+						</li>
+						<li class="text-center"  v-if="showFile2">
+							<a href="javascript:;" class="file" >更改logo<input type="file" ref="logo" id="file" v-on:click="logoEdlit()"></a>
+						</li>
+					</ul>
+					<div class="abtfoot clearfix">
+						<button class="btn btn-default btn-lg pull-left" v-on:click="logoImg">返回</button>
+						<button class="btn btn-success  btn-lg pull-right" v-on:click="logoImg">确定上传</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--banner编辑区-->
+		
+	</div>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://www.lepluslife.com/resource/backRes/js/jquery-2.0.3.min.js"></script>
+    	<script type="text/javascript"src="http://www.lepluslife.com/resource/backRes/js/vendor/jquery.ui.widget.js"></script>
+    	<script type="text/javascript"src="http://www.lepluslife.com/resource/backRes/js/jquery.iframe-transport.js"></script>
+    	<script type="text/javascript" src="http://www.lepluslife.com/resource/backRes/js/jquery.fileupload.js"></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="js/editIndex.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
